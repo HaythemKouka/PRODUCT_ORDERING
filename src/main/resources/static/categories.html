@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Gestion des Catégories</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+		}
+
+		input,
+		button {
+			margin: 5px;
+			padding: 5px;
+		}
+
+		ul {
+			padding: 0;
+			list-style: none;
+		}
+
+		li {
+			margin: 5px 0;
+		}
+
+		.actions {
+			margin-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2>Gestion des Catégories</h2>
+
+	<input type="text" id="nameInput" placeholder="Nom de la catégorie">
+	<button onclick="createCategory()">➕ Ajouter</button>
+
+	<ul id="categoryList"></ul>
+
+	<script>
+		const GRAPHQL_URL = '/api/graphql';
+
+		function createCategory() {
+			const name = document.getElementById('nameInput').value;
+			fetch(GRAPHQL_URL, {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					query: `mutation { createCategory(name: "${name}") { id name } }`
+				})
+			})
+				.then(() => {
+					document.getElementById('nameInput').value = '';
+					loadCategories();
+				});
+		}
+
+		function deleteCategory(id) {
+			fetch(GRAPHQL_URL, {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					query: `mutation { deleteCategory(id: ${id}) }`
+				})
+			})
+				.then(() => loadCategories());
+		}
+
+		function loadCategories() {
+			fetch(GRAPHQL_URL, {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({query: '{ categories { id name } }'})
+			})
+				.then(res => res.json())
+				.then(data => {
+					const list = document.getElementById('categoryList');
+					list.innerHTML = '';
+					data.data.categories.forEach(cat => {
+						const li = document.createElement('li');
+						li.innerHTML = `${cat.name}
+            <button class="actions" onclick="deleteCategory(${cat.id})">🗑️ Supprimer</button>`;
+						list.appendChild(li);
+					});
+				});
+		}
+
+		loadCategories();
+	</script>
+
+</body>
+
+</html>
