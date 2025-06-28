@@ -78,5 +78,9 @@ type Mutation {
 
   createAddress(street: String!, city: String!, zipCode: String!, userId: ID!): Address
   deleteAddress(id: ID!): Boolean
+  updateAddress(  id: ID!,street: String!, city: String!, country: String): Address
+  updateCategory(id: ID!, name: String!): Category
+  deleteCategory(id: ID!): Boolean
+  
   
 }
