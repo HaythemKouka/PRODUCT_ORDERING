@@ -77,4 +77,6 @@ type Mutation {
   createOrderItem(orderId: ID!, productId: ID!, quantity: Int!): OrderItem
 
   createAddress(street: String!, city: String!, zipCode: String!, userId: ID!): Address
+  deleteAddress(id: ID!): Boolean
+  
 }
