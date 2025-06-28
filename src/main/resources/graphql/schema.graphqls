@@ -29,7 +29,7 @@ type Order {
   orderItems: [OrderItem]
   totalAmount: Float
 }
-
+  
 type OrderItem {
   id: ID!
   order: Order
@@ -82,4 +82,10 @@ type Mutation {
   createOrderItem(orderId: ID!, productId: ID!, quantity: Int!): OrderItem
 
   createAddress(street: String!, city: String!, zipCode: String!, userId: ID!): Address
+  deleteAddress(id: ID!): Boolean
+  updateAddress(  id: ID!,street: String!, city: String!, country: String): Address
+  updateCategory(id: ID!, name: String!): Category
+  deleteCategory(id: ID!): Boolean
+  
+  
 }

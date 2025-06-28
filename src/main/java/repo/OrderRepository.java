@@ -13,3 +13,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     // Custom queries for Order can go here, for example:
     List<Order> findByUserId(Long userId);
 }
+  

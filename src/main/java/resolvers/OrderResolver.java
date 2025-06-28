@@ -66,4 +66,11 @@ public class OrderResolver {
 
         return order;
     }
+
+    public static void main(String[] args) {
+        // This is the entry point of the application
+        // You can run Maven commands programmatically if needed
+        // For example, to clean and install the project:
+        // org.apache.maven.cli.MavenCli.main(new String[]{"clean", "install"});
+    }
 }
