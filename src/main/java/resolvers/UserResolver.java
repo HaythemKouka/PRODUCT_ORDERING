@@ -24,6 +24,28 @@ public class UserResolver {
     	
         return userRepository.findAll();
     }
+    @QueryMapping
+    public User user(@Argument Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @MutationMapping
+    public User updateUser(@Argument Long id, @Argument String name, @Argument String email) {
+        return userRepository.findById(id).map(user -> {
+            user.setName(name);
+            user.setEmail(email);
+            return userRepository.save(user);
+        }).orElse(null);
+    }
+
+    @MutationMapping
+    public Boolean deleteUser(@Argument Long id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
     @MutationMapping
     public User createUser(@Argument String name, @Argument String email) {

@@ -27,5 +27,4 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    // Getters and setters
-}
+ }
