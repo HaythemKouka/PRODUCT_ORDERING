@@ -29,7 +29,7 @@ type Order {
   orderItems: [OrderItem]
   totalAmount: Float
 }
-
+  
 type OrderItem {
   id: ID!
   order: Order
