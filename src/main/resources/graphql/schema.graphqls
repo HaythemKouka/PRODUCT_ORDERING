@@ -69,18 +69,12 @@ type Mutation {
   createUser(name: String!, email: String!): User
   updateUser(id: ID!, name: String!, email: String!): User
   deleteUser(id: ID!): Boolean
-  
-  
   createProduct(name: String!, description: String, price: Float!, categoryId: ID): Product
   updateProduct(id: ID!, name: String!, price: Float!, categoryId: ID!): Product
   deleteProduct(id: ID!): Boolean
-
   createCategory(name: String!): Category
-
   createOrder(userId: ID!, orderItemIds: [ID!]!): Order
-
   createOrderItem(orderId: ID!, productId: ID!, quantity: Int!): OrderItem
-
   createAddress(street: String!, city: String!, zipCode: String!, userId: ID!): Address
   deleteAddress(id: ID!): Boolean
   updateAddress(  id: ID!,street: String!, city: String!, country: String): Address
